@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements GetFlickrJsonData
     }
 
     @Override
-    public void OnItemLongClick(View view, int position) {
+    public void onItemLongClick(View view, int position) {
         Log.d(TAG, "OnItemLongClick: starts");
         Toast.makeText(MainActivity.this, "Long tap at position " + position, Toast.LENGTH_SHORT).show();
     }

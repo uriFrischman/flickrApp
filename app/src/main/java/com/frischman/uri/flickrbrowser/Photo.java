@@ -1,10 +1,14 @@
 package com.frischman.uri.flickrbrowser;
 
+import java.io.Serializable;
+
 /**
  * Created by Uri on 2017-05-30.
  */
 
-class Photo {
+class Photo implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private String mTitle;
     private String mAuthor;

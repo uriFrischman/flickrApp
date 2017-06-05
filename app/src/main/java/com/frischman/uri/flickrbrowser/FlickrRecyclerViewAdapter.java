@@ -37,18 +37,24 @@ class FlickrRecyclerViewAdapter extends RecyclerView.Adapter<FlickrRecyclerViewA
 
     @Override
     public void onBindViewHolder(FlickrImageViewHolder holder, int position) {
-        Photo photoItem = mPhotosList.get(position);
-        Log.d(TAG, "onBindViewHolder: " + photoItem.getTitle() + "------> " +  position);
-        Picasso.with(mContext).load(photoItem.getImage())
-                .error(R.drawable.placeholder)
-                .placeholder(R.drawable.placeholder)
-                .into(holder.thumbnail);
-        holder.title.setText(photoItem.getTitle());
+
+        if (mPhotosList == null || mPhotosList.size() == 0) {
+            holder.thumbnail.setImageResource(R.drawable.placeholder);
+            holder.title.setText(R.string.empty_photo);
+        } else {
+            Photo photoItem = mPhotosList.get(position);
+            Log.d(TAG, "onBindViewHolder: " + photoItem.getTitle() + "------> " + position);
+            Picasso.with(mContext).load(photoItem.getImage())
+                    .error(R.drawable.placeholder)
+                    .placeholder(R.drawable.placeholder)
+                    .into(holder.thumbnail);
+            holder.title.setText(photoItem.getTitle());
+        }
     }
 
     @Override
     public int getItemCount() {
-        return ((mPhotosList != null) && (mPhotosList.size() != 0) ? mPhotosList.size() : 0);
+        return ((mPhotosList != null) && (mPhotosList.size() != 0) ? mPhotosList.size() : 1);
     }
 
     void loadNewData(List<Photo> newPhotos) {
@@ -72,5 +78,5 @@ class FlickrRecyclerViewAdapter extends RecyclerView.Adapter<FlickrRecyclerViewA
             this.title = (TextView) itemView.findViewById(R.id.title);
         }
     }
-    
+
 }
